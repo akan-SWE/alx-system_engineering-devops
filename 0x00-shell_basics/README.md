@@ -1,7 +1,7 @@
 # This directory contains all my scripts
 
 **0-current_working_directory** - this script prints the absolute path name of the current working directory.<br>
-**1-list** - this script display the contents list of your directory.<br>
+**1-listit** - this script display the contents list of your directory.<br>
 **2-bring_me_home** - this script changes the working directory to the user's home directory.<br>
 **3-listfiles - this script displays current directory contents in a long format.<br>
 **4-listmorefiles** - this script displays current directory contents, including hidden files.<br>
