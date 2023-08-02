@@ -3,7 +3,7 @@
 **0-current_working_directory** - this script prints the absolute path name of the current working directory.<br>
 **1-listit** - this script display the contents list of your directory.<br>
 **2-bring_me_home** - this script changes the working directory to the user's home directory.<br>
-**3-listfiles - this script displays current directory contents in a long format.<br>
+**3-listfiles** - this script displays current directory contents in a long format.<br>
 **4-listmorefiles** - this script displays current directory contents, including hidden files.<br>
 **5-listfilesdigitonly** - this scripts displays current directory.<br>
 * format.<br>
@@ -29,3 +29,9 @@
 **14-copy_html** - this script copies all the HTML files from the current working directory to the parent of the workding directory<br>
 * only copy files that did not exist in the parent of the working directory.<br>
 * were newer than the versions in the parent of the working directory.<br>
+**100-lets_move** - this script  moves all files beginning with an uppercase letter to the directory /tmp/u.<br>
+**101-clean_emacs** - this script deletes all files in the current directory that end with the character ~.<br>
+**102-tree** - this script creates the directories welcome/, welcome/to/ and welocme/to/school in the current directory.<br>
+**103-commas** - this script lists all the files and current directory seperated by commas (,).<br>
+**school.mgc** - this script create a magic file school.mgc that can be used with the command file to detect School data files<br>
+* School data files always contain the string SCHOOL at offset 0.<br>
