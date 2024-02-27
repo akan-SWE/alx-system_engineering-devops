@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# terminatea 4_to_infinity_and_beyond process
+pid=$(pgrep -f "4-to_infinity_and_beyond")
+# Stop the process without displaying any message
+kill -TERM "$pid"
