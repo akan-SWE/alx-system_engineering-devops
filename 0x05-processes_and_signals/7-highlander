@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# This Bash script  displays:
+#   To infinity and beyond indefinitely
+#   With a sleep 2 in between each iteration
+#   I am invincible!!! when receiving a SIGTERM signa
+output()
+{
+    # outputs this when a SIGTERM signal is caught
+    echo "I am invincible!!!"
+}
+
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2  # pause for 2 second
+    trap 'output' SIGTERM  # catch any SIGTERM signal
+done
+
