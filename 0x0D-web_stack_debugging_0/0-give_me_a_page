@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Set up Apache web server to return a page containing "Hello Holberton"
+
+# Start apache2 service
+service apache2 start
+
+# Store "Hello Holberton" in Apache default file (index.html) for reading data
+echo "Hello Holberton" > /var/www/html/index.html
+
