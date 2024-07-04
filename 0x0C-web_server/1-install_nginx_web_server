@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Install nginx web server and server a simple page
+
+# Update package list
+apt-get update
+
+# Install nginx
+apt-get install -y nginx
+
+# Ensure it running
+service nginx start
+
+# Write content to index.html
+echo "Hello World!" > /var/www/html/index.html
+
+# Restart service
+service nginx restart
