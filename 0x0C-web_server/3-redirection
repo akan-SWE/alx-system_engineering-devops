@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# This script configures a server running Ubuntu to redirect any request
+# coming in at /redirect_me to another page.
+
+# Create configuration file for the redirection
+touch /etc/nginx/sites-available/redirect.conf
+
+# Add Configuration
+cat << EOF > /etc/nginx/sites-available/redirect.conf
+server {
+    listen 80;
+    server_name ideftbuild.tech 54.237.96.155;
+    location /redirect_me {
+        return 301 https://www.google.com;
+    }
+}
+EOF
+
+# Create symbolic link
+ln -s /etc/nginx/sites-available/redirect.conf /etc/nginx/sites-enabled/redirect.conf
+
+# Refresh nginx
+service nginx restart
