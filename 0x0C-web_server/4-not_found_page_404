@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+##
+#   This script performs the following tasks on a server running Ubuntu:
+#
+#   1. Installs Nginx.
+#   2. Configures the server to redirect any requests coming in at /redirect_me to another page.
+#   3. Sets up a custom 404 error page.
+##
+
+# Install nginx
+apt update -y
+apt-get install -y nginx
+
+# Write content to index.html
+echo "Hello World!" > /var/www/html/index.html
+
+config_file="/etc/nginx/sites-available/default"
+
+# Backup the original configuration file
+cp $config_file /etc/nginx/sites-available/default.bak
+
+# Configure redirection
+redirect_rule="\\\n\tlocation /redirect_me {\n\t\treturn 301 https://www.google.com;\n\t}"
+sed -i "53i $redirect_rule" $config_file
+
+# Define custom 404 page
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+error_rule="    error_page 404 /404.html;"
+sed -i "57i\ $error_rule" $config_file
+
+# Start nginx
+service nginx restart
