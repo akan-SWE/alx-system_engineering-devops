@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+##
+# This script is designed to install and configure HAproxy.
+# The purpose of this configuration is to direct traffic towards two specific servers: web-01 and web-02.
+# After successful execution, HAproxy will evenly distribute incoming traffic to these servers, enhancing load balancing.
+##
+
+# Update packages
+apt update -y
+
+# Install
+apt install -y haproxy
+
+# Configurations
+printf %s "
+
+frontend http
+        bind *:80
+        default_backend web
+
+backend web
+        server web-01 54.237.96.155:80 check
+        server web-02 54.90.51.255:80 check
+
+" >> /etc/haproxy/haproxy.cfg
+
+# Restart service
+service haproxy restart
