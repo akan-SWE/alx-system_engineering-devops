@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+##
+# Script: subdomains_info.sh
+# Author: Akan
+# Description: This script retrieves DNS information for subdomains of a specified domain.
+#
+# Usage:
+#   - ./subdomains_info.sh domain
+#     Displays DNS information for predefined subdomains (www, lb-01, web-01, web-02).
+#   - ./subdomains_info.sh domain subdomain
+#     Displays DNS information for a specific subdomain.
+#
+# Example:
+#   - ./subdomains_info.sh example.com
+#   - ./subdomains_info.sh example.com specific-subdomain
+#
+# Notes:
+#   - Requires 'dig' command to be installed.
+#   - Outputs the DNS record type and IP address for each subdomain queried.
+##
+
+# Function to get DNS information using dig
+function get_dns_info() {
+    local subdomain=$1
+    local domain=$2
+    local type
+    local ip
+
+    record=$(dig +noall +answer "$subdomain.$domain")
+    type=$(echo "$record" | awk '{print $4}')
+    ip=$(echo "$record"| awk '{print $5}')
+
+    echo The subdomain "$subdomain" is a "$type" record and points to "$ip"
+}
+
+# Main logic
+function main() {
+    if [ $# -eq 1 ]; then
+        sub_domains=("www" "lb-01" "web-01" "web-02")
+        for i in "${sub_domains[@]}"; do
+            get_dns_info "$i" "$1"
+        done
+    elif [ $# -eq 2 ]; then
+        get_dns_info "$2" "$1"
+    fi
+}
+
+main "$@"
