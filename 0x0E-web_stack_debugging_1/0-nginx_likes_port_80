@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# This script addresses an issue where the Nginx service inside the Docker container was not starting automatically.
+# It explicitly starts the Nginx service, allowing it to handle requests on port 80.
+
+default_config_file=/etc/nginx/sites-available/default
+default_config_symlink=/etc/nginx/sites-enabled/default
+
+rm $default_config_symlink
+
+if ! grep -qs '^\s*listen [[:digit:]]* default_server' "$default_config_file"; then
+    sed -i '/server[[:space:]]*{/ {n;s/^/    listen 80 default_server;\n/;}' "$default_config_file"
+fi
+
+ln -s $default_config_file $default_config_symlink
+
+service nginx restart
