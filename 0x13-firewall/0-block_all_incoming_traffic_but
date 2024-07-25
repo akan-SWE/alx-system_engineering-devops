@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+# Add UFW rules to deny all incoming traffic except for specified types
+
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+sudo ufw allow ssh
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+sudo ufw enable
+
