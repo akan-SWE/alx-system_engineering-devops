@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""returns information about a given employee's TODO list progress"""
+"""returns information about a given employee's TODO list progress
+and save to a CSV file.
+"""
 import csv
 import requests
 import sys
