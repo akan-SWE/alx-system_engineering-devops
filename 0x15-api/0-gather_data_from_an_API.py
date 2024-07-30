@@ -1,31 +1,23 @@
 #!/usr/bin/python3
-"""Accessing a REST API for todo lists of employees"""
-
+"""returns information about a given employee's TODO list progress"""
 import requests
 import sys
 
-
 if __name__ == '__main__':
-    employeeId = sys.argv[1]
-    baseUrl = "https://jsonplaceholder.typicode.com/users"
-    url = baseUrl + "/" + employeeId
+    employee_id = sys.argv[1]
+    url = 'https://jsonplaceholder.typicode.com/'
+    users = f'users?id={employee_id}'
+    todos = f'todos?userId={employee_id}'
+    done = f'{todos}&completed=true'
 
-    response = requests.get(url)
-    employeeName = response.json().get('name')
+    user_data = requests.get(f"{url}{users}").json()
+    name = user_data[0].get('name')
+    todos_data = requests.get(f'{url}{todos}').json()
+    todos_done = requests.get(f'{url}{done}').json()
 
-    todoUrl = url + "/todos"
-    response = requests.get(todoUrl)
-    tasks = response.json()
-    done = 0
-    done_tasks = []
+    doneN = len(todos_done)
+    totalN = len(todos_data)
 
-    for task in tasks:
-        if task.get('completed'):
-            done_tasks.append(task)
-            done += 1
-
-    print("Employee {} is done with tasks({}/{}):"
-          .format(employeeName, done, len(tasks)))
-
-    for task in done_tasks:
-        print("\t {}".format(task.get('title')))
+    print(f'Employee {name} is done with tasks({doneN}/{totalN}):')
+    for task in todos_done:
+        print(f"\t {task.get('title')}")

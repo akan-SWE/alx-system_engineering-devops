@@ -24,7 +24,7 @@ if __name__ == '__main__':
         todos_data = requests.get(f'{url}{todos}').json()
         writer = csv.writer(file, quotechar='"', quoting=csv.QUOTE_ALL)
 
-        # Insert each item in the todos as a row in the csv file
+        # Insert each item in the todos data set as a row in the csv file
         for todo in todos_data:
             user_id = todo.get('userId')
             task_status = todo.get('completed')
